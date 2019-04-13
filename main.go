@@ -1,28 +1,22 @@
 package main
 
 import (
+	"blogs/config"
+
 	aboutService "blogs/services/aboutservice"
 	articleService "blogs/services/articleservice"
 	contactService "blogs/services/contactservice"
+	homeService "blogs/services/homeservice"
 	loginService "blogs/services/loginservice"
+
 	"log"
 
 	"fmt"
-	"html/template"
 	"net/http"
 )
 
-func handlerIndex(w http.ResponseWriter, r *http.Request) {
-	tmpl := template.Must(template.ParseFiles(
-		"views/templates/header.html",
-		"views/templates/navbar.html",
-		"views/home/index.html",
-	))
-
-	err := tmpl.ExecuteTemplate(w, "index", nil)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+func init() {
+	config.InitConnectDB()
 }
 
 func main() {
@@ -33,14 +27,15 @@ func main() {
 
 	http.Handle("/fonts/", http.StripPrefix("/fonts/", http.FileServer(http.Dir("views/assets/fonts"))))
 
-	http.HandleFunc("/", handlerIndex)
+	http.HandleFunc("/", homeService.HandlerIndex)
 	http.HandleFunc("/about", aboutService.HandlerAbout)
 	http.HandleFunc("/contact", contactService.HandlerContact)
 	http.HandleFunc("/article", articleService.HandlerArticle)
+	http.HandleFunc("/article/detail/", articleService.HandlerDetailArticle)
 	http.HandleFunc("/login", loginService.HandlerLogin)
 
 	// var address = "localhost:9001"
-	port := "9090"
+	port := "9002"
 	fmt.Println("server jalan di port :", port)
 	if errHTTP := http.ListenAndServe(":"+port, nil); errHTTP != nil {
 		log.Println(errHTTP)

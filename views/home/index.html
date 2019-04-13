@@ -1,4 +1,4 @@
-{{define "index"}}
+{{define "home"}}
 <!DOCTYPE html>
 <html lang="en">
     {{template "header"}}
@@ -9,14 +9,15 @@
                 <h1>Artikel Programming</h1> 
                 <p>Ini adalah artikel tentang programming</p> 
             </div>
-
+            {{range $index, $elem := .}}
             <div class="panel panel-default">
                 <div class="panel-body">
-                <h4 class="card-title">Card title</h4>
-                <p class="card-text">Some example text. Some example text.</p>
-                <a href="#" class="card-link">Card link</a>
+                <h4 class="card-title">{{$elem.Title}}</h4>
+                <p class="card-text">{{$elem.ShortDescription}}</p>
+                <a href="/article/detail?id={{$elem.ArticleID}}" class="card-link">Read More</a>
                 </div>
             </div>
+            {{end}}
         </div>
     </body>
 </html>
