@@ -5,26 +5,30 @@ import (
 	articleService "blogs/services/articleservice"
 	contactService "blogs/services/contactservice"
 	loginService "blogs/services/loginservice"
+	"log"
 
 	"fmt"
 	"html/template"
 	"net/http"
-	"path"
 )
 
 func handlerIndex(w http.ResponseWriter, r *http.Request) {
-	var filepath = path.Join("views/home", "index.html")
+	// var filepath = path.Join("views/home", "index.html")
 
-	tmpl, err := template.ParseFiles(filepath)
+	// tmpl, err := template.ParseFiles(filepath)
+	// if err != nil {
+	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
+	// 	return
+	// }
+	tmpl := template.Must(template.ParseFiles(
+		"views/templates/header.html",
+		"views/templates/navbar.html",
+		"views/home/index.html",
+	))
+
+	err := tmpl.ExecuteTemplate(w, "index", nil)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	err = tmpl.Execute(w, nil)
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return
 	}
 }
 
@@ -42,10 +46,10 @@ func main() {
 	http.HandleFunc("/article", articleService.HandlerArticle)
 	http.HandleFunc("/login", loginService.HandlerLogin)
 
-	var address = "localhost:9000"
-	fmt.Printf("server started at %s\n", address)
-	err := http.ListenAndServe(address, nil)
-	if err != nil {
-		fmt.Println(err.Error())
+	// var address = "localhost:9001"
+	port := "9090"
+	fmt.Println("server jalan di port :", port)
+	if errHTTP := http.ListenAndServe(":"+port, nil); errHTTP != nil {
+		log.Println(errHTTP)
 	}
 }
