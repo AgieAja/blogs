@@ -13,13 +13,6 @@ import (
 )
 
 func handlerIndex(w http.ResponseWriter, r *http.Request) {
-	// var filepath = path.Join("views/home", "index.html")
-
-	// tmpl, err := template.ParseFiles(filepath)
-	// if err != nil {
-	// 	http.Error(w, err.Error(), http.StatusInternalServerError)
-	// 	return
-	// }
 	tmpl := template.Must(template.ParseFiles(
 		"views/templates/header.html",
 		"views/templates/navbar.html",

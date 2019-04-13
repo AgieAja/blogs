@@ -1,31 +1,9 @@
+{{define "about"}}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>My Blogs</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <script src="/js/jquery.min.js"></script>
-        <script src="/js/bootstrap.min.js"></script>
-    </head>
+    {{template "header"}}
     <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                <a class="navbar-brand" href="#">Blog</a>
-                </div>
-                <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About</a></li>
-                <li><a href="/contact">Contact us</a></li>
-                <li><a href="/article">Articles</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
-        </nav>
-        
+        {{template "navbar"}}
         <div class="container">
             <div class="jumbotron">
                 <h1>Tentang Saya</h1> 
@@ -36,3 +14,4 @@
         </div>
     </body>
 </html>
+{{end}}
