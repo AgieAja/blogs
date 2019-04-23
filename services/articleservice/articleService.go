@@ -28,6 +28,20 @@ func HandlerArticle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//HandlerPrepareCreateArticle - handler for show form create article
+func HandlerPrepareCreateArticle(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles(
+		"views/templates/header.html",
+		"views/templates/navbar.html",
+		"views/article/add_article.html",
+	))
+
+	err := tmpl.ExecuteTemplate(w, "add_article", nil)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
 //HandlerDetailArticle - handler page detail article
 func HandlerDetailArticle(w http.ResponseWriter, r *http.Request) {
 	tmpl := template.Must(template.ParseFiles(

@@ -32,6 +32,7 @@ func main() {
 	http.HandleFunc("/contact", contactService.HandlerContact)
 	http.HandleFunc("/article", articleService.HandlerArticle)
 	http.HandleFunc("/article/detail/", articleService.HandlerDetailArticle)
+	http.HandleFunc("/article/prepareCreate", articleService.HandlerPrepareCreateArticle)
 	http.HandleFunc("/login", loginService.HandlerLogin)
 
 	// var address = "localhost:9001"
