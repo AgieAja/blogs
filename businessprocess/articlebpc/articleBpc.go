@@ -17,6 +17,16 @@ func GetArticlePublish() []articleModel.Articles {
 	return myList
 }
 
+//GetArticleAll - get all article
+func GetArticleAll() []articleModel.VwArticles {
+	myList, err := articleDac.FindAll()
+	if err != nil {
+		return nil
+	}
+
+	return myList
+}
+
 //GetDetailArticle - get detail article
 func GetDetailArticle(id int64) articleModel.Articles {
 	myData, err := articleDac.FindByArticleID(id)

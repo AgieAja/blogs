@@ -8,7 +8,34 @@
             <div class="container">
                 <div class="panel panel-primary">
                     <div class="panel-heading">Article</div>
-                    <div class="panel-body">Panel Content</div>
+                    <div class="panel-body">
+                        <a class="btn btn-success" href="#">Create Article</a><br/><br/>
+                        <table id="dtUser" class="table table-bordered">
+                            <thead>
+                                <th>Article Id</th>
+                                <th>Title</th>
+                                <th>Short Description</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>aksi</th>
+                            </thead>
+                            <tbody>
+                                {{range $index, $elem := .}}
+                                <tr>
+                                    <td>{{$elem.ArticleID}}</td>
+                                    <td>{{$elem.Title}}</td>
+                                    <td>{{$elem.ShortDescription}}</td>
+                                    <td>{{$elem.Description}}</td>
+                                    <td>{{$elem.StatusDesc}}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-warning">Edit</a> ||
+                                        <a href="#" class="btn btn-danger">Hapus</a>
+                                    </td>
+                                </tr>
+                                {{end}}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>	 	
             </div>   
         </div>

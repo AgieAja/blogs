@@ -11,6 +11,17 @@ type Articles struct {
 	Title            string
 	ShortDescription string
 	Description      string
+	Status           int
 	CreatedBy        int64
 	UpdatedBy        int64
+}
+
+//VwArticles - struct for vw_articles
+type VwArticles struct {
+	ArticleID        int64
+	Title            string
+	ShortDescription string
+	Description      string
+	Status           int
+	StatusDesc       string
 }

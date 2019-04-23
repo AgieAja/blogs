@@ -2,6 +2,7 @@ package articleservice
 
 import (
 	articleBpc "blogs/businessprocess/articlebpc"
+	"log"
 	"strconv"
 
 	"html/template"
@@ -16,7 +17,12 @@ func HandlerArticle(w http.ResponseWriter, r *http.Request) {
 		"views/article/article.html",
 	))
 
-	err := tmpl.ExecuteTemplate(w, "article", nil)
+	myData := articleBpc.GetArticleAll()
+	if len(myData) == 0 {
+		log.Println("data not found")
+	}
+
+	err := tmpl.ExecuteTemplate(w, "article", myData)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
