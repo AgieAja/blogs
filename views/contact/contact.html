@@ -7,19 +7,19 @@
         <div class="container">
             <div class="panel panel-default">
                 <div class="panel-body">
-                <form action="/action_page.php">
+                <form action="/contact/add" method="POST">
                 <h3>Silahkan kirim pesan</h3>
                 <div class="form-group">
                     <label for="email">Email address:</label>
-                    <input type="email" class="form-control" id="email">
+                    <input type="email" class="form-control" name="email">
                 </div>
                 <div class="form-group">
                     <label for="pwd">Nama:</label>
-                    <input type="text" class="form-control" id="nama">
+                    <input type="text" class="form-control" name="nama">
                 </div>
                 <div class="form-group">
                     <label for="pwd">Pesan:</label>
-                    <textarea class="form-control" rows="5" id="comment"></textarea>
+                    <textarea class="form-control" rows="5" name="pesan"></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
