@@ -28,16 +28,22 @@ func main() {
 	http.Handle("/fonts/", http.StripPrefix("/fonts/", http.FileServer(http.Dir("views/assets/fonts"))))
 
 	http.HandleFunc("/", homeService.HandlerIndex)
+
 	http.HandleFunc("/about", aboutService.HandlerAbout)
+
 	http.HandleFunc("/contact", contactService.HandlerContact)
 	http.HandleFunc("/contact/add", contactService.HandlerAddMessage)
+
 	http.HandleFunc("/article", articleService.HandlerArticle)
 	http.HandleFunc("/article/add", articleService.HandlerCreateArticle)
+	http.HandleFunc("/article/update", articleService.HandlerUpdateArticle)
 	http.HandleFunc("/article/detail/", articleService.HandlerDetailArticle)
 	http.HandleFunc("/article/delete/", articleService.HandlerDeleteArticle)
 	http.HandleFunc("/article/publish/", articleService.HandlerPublishArticle)
 	http.HandleFunc("/article/unpublish/", articleService.HandlerUnPublishArticle)
 	http.HandleFunc("/article/prepareCreate", articleService.HandlerPrepareCreateArticle)
+	http.HandleFunc("/article/prepareedit/", articleService.HandlerPrepareEditArticle)
+
 	http.HandleFunc("/login", loginService.HandlerLogin)
 
 	// var address = "localhost:9001"

@@ -28,7 +28,7 @@
                                     <td>{{$elem.Description}}</td>
                                     <td>{{$elem.StatusDesc}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-warning">Edit</a> ||
+                                        <a href="/article/prepareedit?id={{$elem.ArticleID}}" class="btn btn-warning">Edit</a> ||
                                         <a href="/article/delete?id={{$elem.ArticleID}}" class="btn btn-danger">Delete</a> ||
                                         <a href="/article/publish?id={{$elem.ArticleID}}" class="btn btn-success">Publish</a> ||
                                         <a href="/article/unpublish?id={{$elem.ArticleID}}" class="btn btn-primary">Unpublish</a>

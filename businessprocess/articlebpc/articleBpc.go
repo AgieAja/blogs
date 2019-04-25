@@ -59,6 +59,17 @@ func AddArticle(myData articleModel.AddArticle) bool {
 	return true
 }
 
+//UpdateArticle - update article
+func UpdateArticle(myParam articleModel.AddArticle, myid int64) bool {
+	err := articleDac.UpdateData(myParam, myid)
+	if err != nil {
+		log.Println("UpdateArticle err = " + err.Error())
+		return false
+	}
+
+	return true
+}
+
 //DeleteArticle - delete article
 func DeleteArticle(myid int64) bool {
 	errDelete := articleDac.DeleteData(myid)

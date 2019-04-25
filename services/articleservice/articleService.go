@@ -59,6 +59,25 @@ func HandlerDetailArticle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+//HandlerPrepareEditArticle - prepare edit article
+func HandlerPrepareEditArticle(w http.ResponseWriter, r *http.Request) {
+	tmpl := template.Must(template.ParseFiles(
+		"views/templates/header.html",
+		"views/templates/navbar.html",
+		"views/article/edit_article.html",
+	))
+
+	data := r.URL.Query()
+	myid := data.Get("id")
+	id, _ := strconv.ParseInt(myid, 10, 64)
+	myData := articleBpc.GetDetailArticle(id)
+
+	err := tmpl.ExecuteTemplate(w, "edit_article", myData)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
+}
+
 //HandlerCreateArticle - handler create new article
 func HandlerCreateArticle(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
@@ -85,6 +104,53 @@ func HandlerCreateArticle(w http.ResponseWriter, r *http.Request) {
 		}
 
 		log.Println("Data has been saved")
+
+		tmpl := template.Must(template.ParseFiles(
+			"views/templates/header.html",
+			"views/templates/navbar.html",
+			"views/article/article.html",
+		))
+
+		myList := articleBpc.GetArticleAll()
+		err := tmpl.ExecuteTemplate(w, "article", myList)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
+
+		return
+	}
+
+	http.Error(w, "Method not allowed", http.StatusBadRequest)
+}
+
+//HandlerUpdateArticle - handler update article
+func HandlerUpdateArticle(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		if err := r.ParseForm(); err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		var articleid = r.FormValue("articleid")
+		var title = r.FormValue("title")
+		var shortdesc = r.FormValue("shortdesc")
+		var desc = r.Form.Get("desc")
+		myData := articleModel.AddArticle{
+			Title:     title,
+			ShortDesc: shortdesc,
+			Desc:      desc,
+			CreatedBy: 1,
+			UpdatedBy: 1,
+		}
+
+		id, _ := strconv.ParseInt(articleid, 10, 64)
+		res := articleBpc.UpdateArticle(myData, id)
+		if !res {
+			http.Error(w, "Failed Updated", http.StatusBadRequest)
+			return
+		}
+
+		log.Println("Data has been updated")
 
 		tmpl := template.Must(template.ParseFiles(
 			"views/templates/header.html",
