@@ -25,3 +25,12 @@ type VwArticles struct {
 	Status           int
 	StatusDesc       string
 }
+
+//AddArticle - struct for add new article
+type AddArticle struct {
+	Title     string
+	ShortDesc string
+	Desc      string
+	CreatedBy int64
+	UpdatedBy int64
+}
